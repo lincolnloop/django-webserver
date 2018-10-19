@@ -1,5 +1,6 @@
+from __future__ import absolute_import
+
 from gunicorn.app.wsgiapp import WSGIApplication
-from gunicorn.config import get_default_config_file
 
 from ...base_command import WebserverCommand
 from ...utils import wsgi_app_name

@@ -12,7 +12,12 @@ class WarmupFailure(Exception):
 
 def wsgi_healthcheck(app, url, ok_status=200):
     try:
-        headers = {"HTTP_HOST": settings.ALLOWED_HOSTS[0]}
+        host = settings.ALLOWED_HOSTS[0]
+        if host.startswith("."):
+            host = "example" + host
+        elif host == "*":
+            host = "testserver"
+        headers = {"HTTP_HOST": host}
     except (AttributeError, IndexError):
         headers = {}
     warmup = app.get_response(RequestFactory().get(url, **headers))

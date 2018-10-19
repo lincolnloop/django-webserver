@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from waitress.runner import run
 
 from ...base_command import WebserverCommand

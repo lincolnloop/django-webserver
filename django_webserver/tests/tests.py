@@ -14,9 +14,7 @@ except ImportError:
     import mock
 
 
-os.environ.setdefault(
-    "DJANGO_SETTINGS_MODULE", "django_webserver.tests.django_settings"
-)
+os.environ["DJANGO_SETTINGS_MODULE"] = "django_webserver.tests.django_settings"
 # make sure subprocess logs are flushed
 os.environ["PYTHONUNBUFFERED"] = "1"
 
@@ -53,7 +51,6 @@ def test_gunicorn():
 def test_waitress():
     proc = run_server("waitress", "--port=0", "--host=127.0.0.1")
     output = proc.communicate()[0].decode("utf-8")
-    print(output)
     assert "Serving on http://localhost:" in output
 
 
@@ -61,7 +58,7 @@ def test_default_args():
     assert pyuwsgi.get_default_args() == [
         "--strict",
         "--need-app",
-        "--module=django_webserver.tests.django_settings:application",
+        "--module=django_webserver.tests.app:application",
         "--static-map",
         "/static=/tmp/static",
     ]
@@ -76,35 +73,35 @@ def test_settings_args():
 @mock.patch("pyuwsgi.run")
 def test_warmup(m_run, m_wsgi):
     pyuwsgi.Command().run_from_argv([])
-    m_wsgi.assert_called_once()
-    m_run.assert_called_once()
+    assert m_wsgi.call_count == 1
+    assert m_run.call_count == 1
 
 
+@override_settings(WEBSERVER_WARMUP=False)
 @mock.patch("django_webserver.base_command.get_internal_wsgi_application")
 @mock.patch("pyuwsgi.run")
-@override_settings(WEBSERVER_WARMUP=False)
 def test_no_warmup(m_run, m_wsgi):
     pyuwsgi.Command().run_from_argv([])
-    m_wsgi.assert_not_called()
-    m_run.assert_called_once()
+    assert m_wsgi.call_count == 0
+    assert m_run.call_count == 1
 
 
-@mock.patch("pyuwsgi.run")
 @override_settings(WEBSERVER_WARMUP_HEALTHCHECK="/-/health/")
+@mock.patch("pyuwsgi.run")
 def test_healthcheck_ok(m_run):
     pyuwsgi.Command().run_from_argv([])
-    m_run.assert_called_once()
+    assert m_run.call_count == 1
 
 
-@mock.patch("pyuwsgi.run")
 @override_settings(WEBSERVER_WARMUP_HEALTHCHECK="/-/404/")
-def test_healthcheck_fail(m_run):
+@mock.patch("django_webserver.management.commands.pyuwsgi.Command.start_server")
+def test_healthcheck_fail(m_start):
     with pytest.raises(WarmupFailure):
         pyuwsgi.Command().run_from_argv([])
 
 
+@override_settings(WEBSERVER_WARMUP_HEALTHCHECK="/-/health/", ALLOWED_HOSTS=["*"])
 @mock.patch("pyuwsgi.run")
-@override_settings(WEBSERVER_WARMUP_HEALTHCHECK="/-/health/", ALLOWED_HOSTS=[])
-def test_healthcheck_no_allowed_hosts(m_run):
+def test_healthcheck_all_allowed_hosts(m_run):
     pyuwsgi.Command().run_from_argv([])
-    m_run.assert_called_once()
+    assert m_run.call_count == 1

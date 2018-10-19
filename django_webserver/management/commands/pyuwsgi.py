@@ -1,10 +1,7 @@
 from __future__ import absolute_import
 
-from django.conf import settings
-from django.core.management import BaseCommand
-from django.core.servers.basehttp import get_internal_wsgi_application
-
 import pyuwsgi
+from django.conf import settings
 
 from ...base_command import WebserverCommand
 from ...utils import wsgi_app_name
