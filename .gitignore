@@ -1,0 +1,6 @@
+.pytest_cache
+.coverage
+htmlcov
+.venv
+/build
+/dist
