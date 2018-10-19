@@ -14,7 +14,7 @@ matrix:
 before_install:
   - pip install -U pip
 install:
-  - pip install .[test]
+  - pip install .[test,pyuwsgi,gunicorn,waitress]
 script:
   # Ensure we are testing installed app, not local code
   - mkdir -p /tmp/sandbox && cd /tmp/sandbox
