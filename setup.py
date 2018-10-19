@@ -24,7 +24,12 @@ setup(
     packages=find_packages(),
     license="MIT",
     install_requires=["Django"],
-    extras_require={"test": TESTS_REQUIRE, "pyuwsgi": ["pyuwsgi>=2.0.17.2b3"], "gunicorn": ["gunicorn"]},
+    extras_require={
+        "test": TESTS_REQUIRE,
+        "pyuwsgi": ["pyuwsgi>=2.0.17.2b3"],
+        "gunicorn": ["gunicorn"],
+        "waitress": ["waitress"],
+    },
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
