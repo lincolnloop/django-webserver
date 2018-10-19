@@ -1,7 +1,10 @@
 # print("sleeping...")
 # import time; time.sleep(5)
 from django.core.wsgi import get_wsgi_application
-from django.urls import path
+try:
+    from django.urls import re_path as url
+except ImportError:
+    from django.conf.urls import url
 
 SECRET_KEY = "s"
 WSGI_APPLICATION = "django_webserver.tests.django_settings.application"
@@ -17,7 +20,7 @@ def health(request):
     return HttpResponse("ok")
 
 
-urlpatterns = [path("-/health/", health)]
+urlpatterns = [url(r"^-/health/$", health)]
 
 
 application = get_wsgi_application()
