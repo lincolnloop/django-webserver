@@ -9,7 +9,6 @@ author = "Peter Baumgartner"
 author-email = "pete@lincolnloop.com"
 home-page = "https://github.com/lincolnloop/django-webserver"
 description-file = "README.md"
-requires-python = "~=2.7,>=3.5"
 keywords = "django webserver pyuwsgi uwsgi gunicorn waitress WSGI HTTP"
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -22,6 +21,7 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Framework :: Django",
 ]
+requires = ["Django"]
 
 [tool.flit.metadata.requires-extra]
 test = [

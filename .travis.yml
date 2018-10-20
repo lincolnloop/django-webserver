@@ -1,20 +1,21 @@
 sudo: true
 language: python
-python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
 # Waiting for "official" support
 # https://github.com/travis-ci/travis-ci/issues/9815#issuecomment-405506964
 matrix:
   include:
+    - python: 2.7
+      env: PY2=1
+    - python: 3.5
+    - python: 3.6
     - python: 3.7
       dist: xenial
       sudo: true
 before_install:
-  - pip install -U pip
+  - if [ -n "$PY2" ]; then sudo apt-get update; sudo apt-get install -y python3 python3-pip; fi
+  - if [ -n "$PY2" ]; then sudo pip3 install -U pip; sudo python3 -m pip install flit; else pip3 install -U flit; fi
 install:
-  - pip install .[test,pyuwsgi,gunicorn,waitress]
+  - if [ -n "$PY2" ]; then flit install --python=python2; else flit install; fi
 script:
   # Ensure we are testing installed app, not local code
   - mkdir -p /tmp/sandbox && cd /tmp/sandbox
