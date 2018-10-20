@@ -1,0 +1,33 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+dist-name = "django-webserver"
+module = "django_webserver"
+author = "Peter Baumgartner"
+author-email = "pete@lincolnloop.com"
+home-page = "https://github.com/lincolnloop/django-webserver"
+description-file = "README.md"
+requires-python = "~=2.7,>=3.5"
+keywords = "django webserver pyuwsgi uwsgi gunicorn waitress WSGI HTTP"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Framework :: Django",
+]
+
+[tool.flit.metadata.requires-extra]
+test = [
+    "pytest",
+    "mock; python_version < '3.3'",
+]
+pyuwsgi = ["pyuwsgi"]
+gunicorn = ["gunicorn"]
+waitress = ["waitress"]

@@ -1,6 +1,3 @@
-import os
+"""Django management commands for production webservers"""
 
-UWSGI_VERSION = "2.0.17.1"
-UWSGI_LIB = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "libuwsgi-{}.so".format(UWSGI_VERSION))
-)
+__version__ = "1.0"
