@@ -30,4 +30,5 @@ test = [
 ]
 pyuwsgi = ["pyuwsgi"]
 gunicorn = ["gunicorn"]
+uvicorn = ["uvicorn"]
 waitress = ["waitress"]

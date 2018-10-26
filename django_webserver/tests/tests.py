@@ -20,6 +20,7 @@ os.environ["PYTHONUNBUFFERED"] = "1"
 
 
 def run_server(name, *args):
+    pytest.importorskip(name)
     # timeout isn't supported in Python 2.7, do it the hard way...
     proc = subprocess.Popen(
         ["django-admin", name] + list(args),
@@ -46,6 +47,15 @@ def test_gunicorn():
     # :8000 is the default, ensure we aren't just seeing that
     assert "127.0.0.1:8000" not in output
     assert "Booting worker with pid:" in output
+
+
+def test_uvicorn():
+    proc = run_server("uvicorn", "--port=0")
+    output = proc.communicate()[0].decode("utf-8")
+    assert "Uvicorn running on http://127.0.0.1:" in output
+    # :8000 is the default, ensure we aren't just seeing that
+    assert "127.0.0.1:8000" not in output
+    assert "Started server process [" in output
 
 
 def test_waitress():

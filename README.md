@@ -101,6 +101,12 @@ Same as the standard gunicorn configuration, but the application will be set for
 
 _Note: Unlike the other servers, you have to configure gunicorn with environment variables or via `sys.argv`. If you use it with Django's `call_command`, keep in mind any additional arguments you pass will not be applied._
 
+### With uvicorn
+
+[uvicorn docs](https://www.uvicorn.org/)
+
+Same as the standard uvicorn configuration, but the application will be set for you from `settings.WSGI_APPLICATION` as well as `--wsgi`.
+
 ### With waitress
 
 [waitress docs](https://docs.pylonsproject.org/projects/waitress/en/latest/index.html)
