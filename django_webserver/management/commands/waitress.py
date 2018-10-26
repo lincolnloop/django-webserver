@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from waitress.runner import run
+import waitress.runner
 
 from ...base_command import WebserverCommand
 from ...utils import wsgi_app_name
@@ -14,5 +14,8 @@ class Command(WebserverCommand):
 
     help = "Start waitress server"
 
+    def prep_server_args(self, argv):
+        return argv[1:] + [wsgi_app_name()]
+
     def start_server(self, *args):
-        run(argv=args[1:] + (wsgi_app_name(),))
+        waitress.runner.run(argv=args)
