@@ -30,5 +30,5 @@ test = [
 ]
 pyuwsgi = ["pyuwsgi"]
 gunicorn = ["gunicorn"]
-uvicorn = ["uvicorn"]
+uvicorn = ["uvicorn; python_version >= '3.5'"]
 waitress = ["waitress"]
