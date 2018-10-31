@@ -57,6 +57,8 @@ Run production webservers such as [pyuwsgi](https://pypi.org/project/pyuwsgi/) (
 
 ### With pyuwsgi
 
+![uwsgi logo](https://cldup.com/uiFb8Sn4Ea.png)
+
 [(py)uWSGI docs](https://uwsgi-docs.readthedocs.io/en/latest/)
 
 Pyuwsgi already knows the Python interpreter and virtualenv (if applicable) to use from the Django management command environment. By default, it will run with the following flags (using `settings.WSGI_APPLICATION` to determine the module):
@@ -95,6 +97,8 @@ Don't forget to also set something like `--socket=:8000` or `--http=:8000` so yo
 
 ### With gunicorn
 
+![gunicorn logo](https://cldup.com/TObFsJSacv.png)
+
 [gunicorn docs](https://docs.gunicorn.org/en/stable/)
 
 Same as the standard gunicorn configuration, but the application will be set for you from `settings.WSGI_APPLICATION`.
@@ -103,11 +107,15 @@ _Note: Unlike the other servers, you have to configure gunicorn with environment
 
 ### With uvicorn
 
+![uvicorn logo](https://cldup.com/By389I7ZHd.png)
+
 [uvicorn docs](https://www.uvicorn.org/)
 
 Same as the standard uvicorn configuration, but the application will be set for you from `settings.WSGI_APPLICATION` as well as `--wsgi`.
 
 ### With waitress
+
+![waitress logo](https://cldup.com/3m18XSyzuM.png)
 
 [waitress docs](https://docs.pylonsproject.org/projects/waitress/en/latest/index.html)
 
