@@ -13,15 +13,21 @@ Run production webservers such as [pyuwsgi](https://pypi.org/project/pyuwsgi/) (
     ```
     pip install django-webserver[pyuwsgi]
     ```
-    
+
     or
-    
+
     ```
     pip install django-webserver[gunicorn]
     ```
-    
+
     or
-    
+
+    ```
+    pip install django-webserver[uvicorn]  # Python 3.5+ only
+    ```
+
+    or
+
     ```
     pip install django-webserver[waitress]
     ```
@@ -36,19 +42,25 @@ Run production webservers such as [pyuwsgi](https://pypi.org/project/pyuwsgi/) (
     ]
     ```
 3. Run:
-    
+
     ```
     manage.py pyuwsgi --http=:8000 ...
     ```
-    
+
     or
-    
+
     ```
-    manage.py gunicorn --bind=:8000
+    manage.py gunicorn
     ```
-    
+
     or
-    
+
+    ```
+    manage.py uvicorn
+    ```
+
+    or
+
     ```
     manage.py waitress --port=8000
     ```
