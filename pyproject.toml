@@ -3,6 +3,7 @@ requires = ["flit"]
 build-backend = "flit.buildapi"
 
 [tool.flit.metadata]
+# version is pulled from django_webserver/__init__.py
 dist-name = "django-webserver"
 module = "django_webserver"
 author = "Peter Baumgartner"
