@@ -90,7 +90,7 @@ PYUWSGI_ARGS = [
     "--master",
     "--strict",
     "--need-app",
-    "--module".
+    "--module",
     ":".join(WSGI_APPLICATION.rsplit(".", 1)),
     "--no-orphans",
     "--vacuum",
