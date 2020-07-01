@@ -15,7 +15,7 @@ class Command(WebserverCommand):
     help = "Start uvicorn server"
 
     def prep_server_args(self, argv):
-        return argv[2:] + [wsgi_app_name(), "--wsgi"]
+        return argv[2:] + [wsgi_app_name(), "--interface=wsgi"]
 
     def start_server(self, *args):
         uvicorn.main.main(args)
