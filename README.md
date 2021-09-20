@@ -11,25 +11,25 @@ Run production webservers such as [pyuwsgi](https://pypi.org/project/pyuwsgi/) (
 1. Install a variant:
 
     ```
-    pip install django-webserver[pyuwsgi]
+    pip install 'django-webserver[pyuwsgi]'
     ```
 
     or
 
     ```
-    pip install django-webserver[gunicorn]
+    pip install 'django-webserver[gunicorn]'
     ```
 
     or
 
     ```
-    pip install django-webserver[uvicorn]  # Python 3.5+ only
+    pip install 'django-webserver[uvicorn]'  # Python 3.5+ only
     ```
 
     or
 
     ```
-    pip install django-webserver[waitress]
+    pip install 'django-webserver[waitress]'
     ```
 
 2. Add to `INSTALLED_APPS`:
